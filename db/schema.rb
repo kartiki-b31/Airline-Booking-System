@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_005601) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_222528) do
   create_table "baggages", force: :cascade do |t|
     t.string "baggage_id"
     t.integer "weight"
@@ -63,6 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_005601) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "confirmed_at"
+    t.string "password_digest"
     t.index ["user_id"], name: "index_users_on_user_id", unique: true
   end
 
