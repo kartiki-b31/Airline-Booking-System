@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_23_222528) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_233244) do
   create_table "baggages", force: :cascade do |t|
     t.string "baggage_id"
     t.integer "weight"
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_23_222528) do
     t.string "source"
     t.string "destination"
     t.string "manufacturer"
-    t.string "class"
+    t.string "flight_class"
     t.integer "capacity"
     t.string "status"
     t.integer "cost"
@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_23_222528) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password"
     t.datetime "confirmed_at"
     t.string "password_digest"
     t.index ["user_id"], name: "index_users_on_user_id", unique: true
