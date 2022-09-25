@@ -3,7 +3,11 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-    @reservations = Reservation.all
+    if current_user != nil
+      @reservations = Reservation.where(user_id: current_user)
+    else
+      @reservations = Reservation.all
+    end
   end
 
   # GET /reservations/1 or /reservations/1.json
@@ -13,6 +17,9 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
+    if @flight.nil?
+      @flight = Flight.where(flight_id: params[:flight_id]).first
+    end
   end
 
   # GET /reservations/1/edit
@@ -22,9 +29,16 @@ class ReservationsController < ApplicationController
   # POST /reservations or /reservations.json
   def create
     @reservation = Reservation.new(reservation_params)
-
+    @reservation.res_id = Array.new(10){[*"A".."Z", *"0".."9"].sample}.join
+    @reservation.user_id = current_user
+    @reservation.flight_id = :flight_id
+    @flight = Flight.where(flight_id: params[:flight_id]).first
+    print "\n" + @flight.capacity
+    remaining_capacity = @flight.capacity - @reservation.passengers
     respond_to do |format|
-      if @reservation.save
+      if @reservation.save and remaining_capacity > -1
+        @flight.capacity = remaining_capacity
+        @flight.save
         format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
         format.json { render :show, status: :created, location: @reservation }
       else
@@ -65,6 +79,6 @@ class ReservationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reservation_params
-      params.require(:reservation).permit(:passengers, :res_id, :ticket_class, :amenities, :total_cost)
+      params.require(:reservation).permit(:passengers, :res_id, :user_id, :flight_id, :ticket_class, :amenities, :total_cost)
     end
 end
