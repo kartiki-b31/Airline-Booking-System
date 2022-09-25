@@ -11,16 +11,18 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :baggage_id, style: "display: block" %>
-    <%= form.text_field :baggage_id %>
-  </div>
+  <!--  <div>-->
+  <%#= form.label :baggage_id, style: "display: block" %>
+  <%#= form.text_field :baggage_id %>
+  <!--  </div>-->
 
   <div>
     <%= form.label :weight, style: "display: block" %>
     <%= form.number_field :weight %>
   </div>
-
+  <div class="field">
+    <%= form.hidden_field :reservation_id, value: @reservation.id %>
+  </div>
   <div>
     <%= form.label :baggage_cost, style: "display: block" %>
     <%= form.number_field :baggage_cost %>
