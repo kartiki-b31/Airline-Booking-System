@@ -35,7 +35,7 @@
       <td><%= link_to "Show this flight", flight %></td>
       <td><%= link_to 'Edit', edit_flight_path(flight) %></td>
       <td><%= link_to 'Destroy', flight, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <td><%= link_to_if flight.status == "Available", 'Book Tickets', new_reservation_path(:flight_id => flight.flight_id) %></td>
+      <td><%= link_to_if flight.status == "Available", 'Book Tickets', new_reservation_path(:flight_id => flight.id) %></td>
 
     </tr>
   <% end %>

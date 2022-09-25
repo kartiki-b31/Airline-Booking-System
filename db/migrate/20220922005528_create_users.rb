@@ -1,4 +1,5 @@
 class CreateUsers < ActiveRecord::Migration[7.0]
+  set_primary_key :user_id
   def change
     create_table :users do |t|
       t.string :name

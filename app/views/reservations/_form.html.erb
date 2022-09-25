@@ -26,6 +26,10 @@
     <%= form.text_field :ticket_class %>
   </div>
 
+  <div class="field">
+    <%= form.hidden_field :flight_id, value: @flight.id %>
+  </div>
+
   <div>
     <%= form.label :amenities, style: "display: block" %>
     <%= form.text_field :amenities %>

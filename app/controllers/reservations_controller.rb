@@ -3,8 +3,8 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-    if current_user != nil
-      @reservations = Reservation.where(user_id: current_user)
+    if current_user.id != nil
+      @reservations = Reservation.where(user_id: current_user.id)
     else
       @reservations = Reservation.all
     end
@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     if @flight.nil?
-      @flight = Flight.where(flight_id: params[:flight_id]).first
+      @flight = Flight.find(params[:flight_id])
     end
   end
 
@@ -30,10 +30,8 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.res_id = Array.new(10){[*"A".."Z", *"0".."9"].sample}.join
-    @reservation.user_id = current_user
-    @reservation.flight_id = :flight_id
-    @flight = Flight.where(flight_id: params[:flight_id]).first
-    print "\n" + @flight.capacity
+    @reservation.user = current_user
+    @flight = Flight.find(params[:reservation][:flight_id])
     remaining_capacity = @flight.capacity - @reservation.passengers
     respond_to do |format|
       if @reservation.save and remaining_capacity > -1

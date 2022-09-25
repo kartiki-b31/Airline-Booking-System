@@ -1,4 +1,5 @@
 class CreateReservations < ActiveRecord::Migration[7.0]
+  set_primary_key :res_id
   def change
     create_table :reservations do |t|
       t.integer :passengers

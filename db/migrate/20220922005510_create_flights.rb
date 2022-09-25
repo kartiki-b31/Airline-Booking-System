@@ -1,4 +1,5 @@
 class CreateFlights < ActiveRecord::Migration[7.0]
+  set_primary_key :flight_id
   def change
     create_table :flights do |t|
       t.string :name
