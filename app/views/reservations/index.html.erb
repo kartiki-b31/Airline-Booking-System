@@ -1,14 +1,38 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Reservations</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Passengers</th>
+    <th>Reservation Id</th>
+    <th>Ticket Class</th>
+    <th>Amenities</th>
+    <th>Total Cost</th>
 
-<div id="reservations">
+    <th colspan="4"></th>
+
+  </tr>
+  </thead>
+
+  <tbody>
   <% @reservations.each do |reservation| %>
-    <%= render reservation %>
-    <p>
-      <%= link_to "Show this reservation", reservation %>
-    </p>
-  <% end %>
-</div>
+    <tr>
+      <td><%= reservation.passengers %></td>
+      <td><%= reservation.res_id %></td>
+      <td><%= reservation.ticket_class %></td>
+      <td><%= reservation.amenities %></td>
+      <td><%= reservation.total_cost %></td>
 
-<%= link_to "New reservation", new_reservation_path %>
+
+      <td><%= link_to "Show this reservation", reservation %></td>
+
+      <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to "Add Baggage", new_baggage_path(:res_id => reservation.id )%></td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
+
