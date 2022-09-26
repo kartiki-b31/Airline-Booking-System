@@ -1,5 +1,6 @@
 class FlightsController < ApplicationController
     before_action :set_flight, only: %i[ show edit update destroy ]
+    # validates :source ,comparison: { other_than: :destination }
 
     # GET /flights or /flights.json
     def index

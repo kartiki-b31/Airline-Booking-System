@@ -25,11 +25,13 @@
       <td><%= reservation.amenities %></td>
       <td><%= reservation.total_cost %></td>
 
-
+      <% if is_admin? %>
       <td><%= link_to "Show this reservation", reservation %></td>
 
       <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <td><%= link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
+      <% else %>
+        <td><%= link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
+      <% end %>
     </tr>
 
   <% end %>
