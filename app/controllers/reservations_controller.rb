@@ -32,10 +32,17 @@ class ReservationsController < ApplicationController
         @reservation.res_id = Array.new(10) { [*"A".."Z", *"0".."9"].sample }.join
         @reservation.user = current_user
         @flight = Flight.find(params[:reservation][:flight_id])
-        remaining_capacity = @flight.capacity - @reservation.passengers
+        if @reservation.passengers > 4
+            @reservation.passengers = 4
+        end
+        @reservation.total_cost = @flight.cost * @reservation.passengers
+        @flight.capacity = @flight.capacity - @reservation.passengers
+        if @flight.capacity == 0
+            @flight.status = "Complete"
+        end
+
         respond_to do |format|
-            if @reservation.save and remaining_capacity > -1
-                @flight.capacity = remaining_capacity
+            if @reservation.save
                 @flight.save
                 format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
                 format.json { render :show, status: :created, location: @reservation }
