@@ -31,8 +31,11 @@ class BaggagesController < ApplicationController
         @baggage = Baggage.new(baggage_params)
         @baggage.baggage_id = Array.new(10) { [*"A".."Z", *"0".."9"].sample }.join
         @baggage.user = current_user
-        @baggage.reservation = Reservation.find(params[:baggage][:reservation_id])
-        respond_to do |format|
+        @reservation = Reservation.find(params[:baggage][:reservation_id])
+        @reservation.total_cost = @reservation.total_cost + (10 * @baggage.weight.to_i)
+        @baggage.baggage_cost = 10 * @baggage.weight.to_i
+        @reservation.save
+            respond_to do |format|
             if @baggage.save
                 format.html { redirect_to baggage_url(@baggage), notice: "Baggage was successfully created." }
                 format.json { render :show, status: :created, location: @baggage }
