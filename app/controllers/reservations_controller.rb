@@ -44,7 +44,7 @@ class ReservationsController < ApplicationController
         respond_to do |format|
             if @reservation.save
                 @flight.save
-                format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
+                format.html { redirect_to reservations_path, notice: "Reservation was successfully created." }
                 format.json { render :show, status: :created, location: @reservation }
             else
                 format.html { render :new, status: :unprocessable_entity }

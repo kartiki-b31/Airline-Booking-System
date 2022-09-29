@@ -37,7 +37,7 @@ class BaggagesController < ApplicationController
         @reservation.save
             respond_to do |format|
             if @baggage.save
-                format.html { redirect_to baggage_url(@baggage), notice: "Baggage was successfully created." }
+                format.html { redirect_to reservations_path, notice: "Baggage was successfully created." }
                 format.json { render :show, status: :created, location: @baggage }
             else
                 format.html { render :new, status: :unprocessable_entity }
