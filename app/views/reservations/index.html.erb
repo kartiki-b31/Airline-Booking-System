@@ -5,8 +5,15 @@
 <table>
   <thead>
   <tr>
+    <% if is_admin? %>
+      <th>UserId</th>
+      <th>UserName</th>
+    <% end %>
     <th>Passengers</th>
     <th>Reservation Id</th>
+    <th>Flight</th>
+    <th>From</th>
+    <th>To</th>
     <th>Ticket Class</th>
     <th>Amenities</th>
     <th>Total Cost</th>
@@ -19,17 +26,26 @@
   <tbody>
   <% @reservations.each do |reservation| %>
     <tr>
-      <td><%= reservation.passengers %></td>
+      <% if is_admin? %>
+        <td><%= reservation.user_id %></td>
+        <td><%= User.find(reservation.user_id).name %></td>
+      <% end %>
+    <td><%= reservation.passengers %></td>
       <td><%= reservation.res_id %></td>
+      <td><%= Flight.find(reservation.flight_id).name %></td>
+      <td><%= Flight.find(reservation.flight_id).source %></td>
+      <td><%= Flight.find(reservation.flight_id).destination %></td>
       <td><%= reservation.ticket_class %></td>
       <td><%= reservation.amenities %></td>
       <td><%= reservation.total_cost %></td>
 
       <% if is_admin? %>
-      <td><%= link_to "Show this reservation", reservation %></td>
-
+      <td><%= link_to "View", reservation %></td>
+        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
       <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% else %>
+        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
       <% end %>
     </tr>

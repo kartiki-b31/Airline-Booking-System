@@ -27,7 +27,7 @@
   </div>
 
   <div class="field">
-    <%= form.hidden_field :flight_id, value: @flight.id %>
+    <%= form.hidden_field :flight_id, value: @reservation.flight_id.nil? ? @flight.id : @reservation.flight_id %>
   </div>
 
   <div>

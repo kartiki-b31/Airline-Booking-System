@@ -3,7 +3,7 @@ class BaggagesController < ApplicationController
 
     # GET /baggages or /baggages.json
     def index
-        if current_user.id != nil
+        if current_user.id != nil and !is_admin?
             @baggages = Baggage.where(user_id: current_user.id)
         else
             @baggages = Baggage.all

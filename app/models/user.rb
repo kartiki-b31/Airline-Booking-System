@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+    has_many :Reservations
+    has_many :Baggages
     has_secure_password
 
     before_save :downcase_email

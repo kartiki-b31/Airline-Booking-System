@@ -3,10 +3,20 @@
 <p>Lets Flyyy!</p>
 <% if current_user %>
   Logged in as <%= current_user.name %>.
-  <br><%= link_to 'Search flights', flights_path %><br>
-  <%= link_to 'View Reservations', reservations_path %><br>
-  <!--  <%#= link_to 'Add credit card', new_credit_card_path %><br>-->
-  <%= link_to "Logout", logout_path %>
+  <br>
+  <% if is_admin? %>
+    <%= link_to 'Show All flights', flights_path %><br>
+    <%= link_to 'Show All Reservations', reservations_path %><br>
+    <%= link_to 'Show All Baggage', baggages_path %><br>
+    <%= link_to 'Show All Users', users_path %><br>
+  <% else %>
+    <%= link_to 'Search flights', flights_path %><br>
+    <%= link_to 'View Reservations', reservations_path %><br>
+    <%= link_to 'View Baggage', baggages_path %><br>
+    <%= link_to 'Edit Profile', edit_user_path(current_user) %><br>
+  <% end %>
+
+    <%= link_to "Logout", logout_path %>
 <% else %>
   <%= link_to "Signup", signup_path %> or
   <%= link_to "Login", login_path %>

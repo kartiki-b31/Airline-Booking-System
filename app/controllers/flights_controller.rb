@@ -37,6 +37,11 @@ class FlightsController < ApplicationController
 
     # PATCH/PUT /flights/1 or /flights/1.json
     def update
+        if @flight.capacity > 0
+            @flight.status = 'Available'
+        else
+            @flight.status = 'Complete'
+        end
         respond_to do |format|
             if @flight.update(flight_params)
                 format.html { redirect_to flight_url(@flight), notice: "Flight was successfully updated." }

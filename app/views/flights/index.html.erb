@@ -35,7 +35,7 @@
       <td><%= flight.status %></td>
       <td><%= flight.cost %></td>
       <% if is_admin? %>
-      <td><%= link_to "Show this flight", flight %></td>
+      <td><%= link_to "View", flight %></td>
       <td><%= link_to 'Edit', edit_flight_path(flight) %></td>
       <td><%= link_to 'Destroy', flight, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% else %>

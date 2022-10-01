@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
 
     # GET /reservations or /reservations.json
     def index
-        if current_user.id != nil
+        if current_user.id != nil and !is_admin?
             @reservations = Reservation.where(user_id: current_user.id)
         else
             @reservations = Reservation.all
@@ -35,11 +35,20 @@ class ReservationsController < ApplicationController
         if @reservation.passengers > 4
             @reservation.passengers = 4
         end
-        @reservation.total_cost = @flight.cost * @reservation.passengers
-        @flight.capacity = @flight.capacity - @reservation.passengers
+        if @flight.capacity > @reservation.passengers
+            @flight.capacity = @flight.capacity - @reservation.passengers
+            @reservation.total_cost = @flight.cost * @reservation.passengers
+
+        else
+            @reservation.passengers = @reservation.passengers - @flight.capacity
+            @reservation.total_cost = @flight.cost * @reservation.passengers
+            @flight.capacity = 0
+        end
         if @flight.capacity == 0
             @flight.status = "Complete"
         end
+
+
 
         respond_to do |format|
             if @reservation.save
@@ -55,6 +64,26 @@ class ReservationsController < ApplicationController
 
     # PATCH/PUT /reservations/1 or /reservations/1.json
     def update
+        @flight = Flight.find(@reservation.flight_id)
+        if @reservation.passengers > 4
+            @reservation.passengers = 4
+        end
+        @old = Reservation.find(@reservation.id)
+        @flight.capacity = @flight.capacity + @old.passengers
+        @reservation.total_cost = @reservation.total_cost - (@flight.cost * @old.passengers)
+        if @flight.capacity > @reservation.passengers
+            @flight.capacity = @flight.capacity - @reservation.passengers
+            @reservation.total_cost = @flight.cost * @reservation.passengers
+        else
+            @reservation.passengers = @reservation.passengers - @flight.capacity
+            @reservation.total_cost = @flight.cost * @reservation.passengers
+            @flight.capacity = 0
+        end
+        if @flight.capacity == 0
+            @flight.status = "Complete"
+        else
+            @flight.status = "Available"
+        end
         respond_to do |format|
             if @reservation.update(reservation_params)
                 format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully updated." }
