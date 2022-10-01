@@ -11,6 +11,16 @@
 </head>
 
 <body>
+<div>
+  <% if logged_in? %>
+    <% if is_admin? %>
+       Logged in as <%= current_user.name %>. Role: <u>Admin</u>
+    <% else %>
+      Logged in as <%= current_user.name %>. Role: <b>User</b>
+    <% end %>
+    <br><br><%= link_to "Back to Homepage", root_path %>
+  <% end %>
+</div>
 <%= yield %>
 </body>
 </html>
