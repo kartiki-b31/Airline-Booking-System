@@ -7,6 +7,8 @@
     <%= render baggage %>
     <p>
       <%= link_to "View baggage", baggage %>
+    <td><%= link_to 'Edit', edit_baggage_path(baggage) %></td>
+    <td><%= link_to 'Destroy', baggage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </p>
   <% end %>
 </div>

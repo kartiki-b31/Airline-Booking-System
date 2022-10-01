@@ -26,7 +26,7 @@ class FlightsController < ApplicationController
 
         respond_to do |format|
             if @flight.save
-                format.html { redirect_to flight_url(@flight), notice: "Flight was successfully created." }
+                format.html { redirect_to flights_url, notice: "Flight was successfully created." }
                 format.json { render :show, status: :created, location: @flight }
             else
                 format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class FlightsController < ApplicationController
         end
         respond_to do |format|
             if @flight.update(flight_params)
-                format.html { redirect_to flight_url(@flight), notice: "Flight was successfully updated." }
+                format.html { redirect_to flights_url, notice: "Flight was successfully updated." }
                 format.json { render :show, status: :ok, location: @flight }
             else
                 format.html { render :edit, status: :unprocessable_entity }

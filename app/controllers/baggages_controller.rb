@@ -34,9 +34,9 @@ class BaggagesController < ApplicationController
         @reservation = Reservation.find(params[:baggage][:reservation_id])
         @reservation.total_cost = @reservation.total_cost + (10 * @baggage.weight.to_i)
         @baggage.baggage_cost = 10 * @baggage.weight.to_i
-        @reservation.save
             respond_to do |format|
             if @baggage.save
+                @reservation.save
                 format.html { redirect_to reservations_path, notice: "Baggage was successfully created." }
                 format.json { render :show, status: :created, location: @baggage }
             else
@@ -48,9 +48,15 @@ class BaggagesController < ApplicationController
 
     # PATCH/PUT /baggages/1 or /baggages/1.json
     def update
+        @reservation = Reservation.find(@baggage.reservation_id)
+        @old = Baggage.find(@baggage.id)
+        @reservation.total_cost = @reservation.total_cost - (10 * @old.weight.to_i)
+        @reservation.total_cost = @reservation.total_cost + (10 * @baggage.weight.to_i)
+        @baggage.baggage_cost = 10 * @baggage.weight.to_i
         respond_to do |format|
             if @baggage.update(baggage_params)
-                format.html { redirect_to baggage_url(@baggage), notice: "Baggage was successfully updated." }
+                @reservation.save
+                format.html { redirect_to reservations_path, notice: "Baggage was successfully updated." }
                 format.json { render :show, status: :ok, location: @baggage }
             else
                 format.html { render :edit, status: :unprocessable_entity }

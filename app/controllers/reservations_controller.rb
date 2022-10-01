@@ -86,7 +86,8 @@ class ReservationsController < ApplicationController
         end
         respond_to do |format|
             if @reservation.update(reservation_params)
-                format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully updated." }
+                @flight.save
+                format.html { redirect_to reservations_path, notice: "Reservation was successfully updated." }
                 format.json { render :show, status: :ok, location: @reservation }
             else
                 format.html { render :edit, status: :unprocessable_entity }
@@ -100,7 +101,7 @@ class ReservationsController < ApplicationController
         @reservation.destroy
 
         respond_to do |format|
-            format.html { redirect_to reservations_url, notice: "Reservation was successfully destroyed." }
+            format.html { redirect_to reservations_path, notice: "Reservation was successfully destroyed." }
             format.json { head :no_content }
         end
     end
