@@ -34,7 +34,7 @@ class FlightsController < ApplicationController
             @flight.status = 'Complete'
         end
         respond_to do |format|
-            if @flight.save
+            if @flight.source != @flight.destination and @flight.save
                 format.html { redirect_to flights_url, notice: "Flight was successfully created." }
                 format.json { render :show, status: :created, location: @flight }
             else
@@ -52,7 +52,7 @@ class FlightsController < ApplicationController
             params[:flight][:status] = 'Complete'
         end
         respond_to do |format|
-            if @flight.update(flight_params)
+            if params[:flight][:source] != params[:flight][:destination] and @flight.update(flight_params)
                 format.html { redirect_to flights_url, notice: "Flight was successfully updated." }
                 format.json { render :show, status: :ok, location: @flight }
             else
