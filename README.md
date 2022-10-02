@@ -31,12 +31,12 @@ The application is deployed using NCSU VCL Remote System.\
 Deployed Server Link: http://152.7.98.88:8080/
 
 ## Credentials for Admin and Users
- - ADMIN :
-        - username: admin@ncsu.edu
-        - password: admin
- - Sample User 1:
-        - username: pm@ncsu.edu
-        - password: pm
- - Sample User 2: 
-        - username: sg@ncsu.edu
-        - password: sg
+ - ADMIN :\
+        - username: admin@ncsu.edu\
+        - password: admin\
+ - Sample User 1:\
+        - username: pm@ncsu.edu\
+        - password: pm\
+ - Sample User 2: \
+        - username: sg@ncsu.edu\
+        - password: sg\
