@@ -26,7 +26,7 @@ The application is tested using the RSpec library of the rails.
 
 ## Deployment 
 
-The application is deployed using NCSU VCL Remote System.\
+The application is deployed using NCSU VCL Remote System.
 
 Deployed Server Link: http://152.7.98.88:8080/
 
