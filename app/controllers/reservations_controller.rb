@@ -6,7 +6,12 @@ class ReservationsController < ApplicationController
         if current_user.id != nil and !is_admin?
             @reservations = Reservation.where(user_id: current_user.id)
         else
-            @reservations = Reservation.all
+            if params[:search]
+                search = '%' + params[:search] + '%'
+                @reservations = Reservation.where('user_id LIKE ?', search)
+            else
+                @reservations = Reservation.all
+            end
         end
     end
 
@@ -47,8 +52,6 @@ class ReservationsController < ApplicationController
         if @flight.capacity == 0
             @flight.status = "Complete"
         end
-
-
 
         respond_to do |format|
             if @reservation.save

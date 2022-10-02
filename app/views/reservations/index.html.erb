@@ -1,6 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Reservations</h1>
+<% if is_admin? %>
+<form action="/reservations" method="GET">
+  <input type="text" name="search" placeholder="Type UserId">
+  <input type="submit" value="Search">
+</form>
+<% end %>
+
+<br>
 <table>
   <thead>
   <tr>

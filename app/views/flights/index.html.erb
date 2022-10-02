@@ -2,6 +2,12 @@
 
 <h1>Flights</h1><br>
 
+
+<form action="/flights" method="GET">
+  <input type="text" name="search" placeholder="Type Flight Name/ Source/ Destination">
+  <input type="submit" value="Search">
+</form>
+<br>
 <table>
   <thead>
   <tr>
@@ -45,7 +51,9 @@
   <% end %>
   </tbody>
 </table>
+<br>
 <% if is_admin? %>
 <%= link_to "New flight", new_flight_path %>
 <% end %>
+<br><br>
 

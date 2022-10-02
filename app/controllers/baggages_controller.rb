@@ -6,7 +6,12 @@ class BaggagesController < ApplicationController
         if current_user.id != nil and !is_admin?
             @baggages = Baggage.where(user_id: current_user.id)
         else
-            @baggages = Baggage.all
+            if params[:search]
+                search = '%' + params[:search] + '%'
+                @baggages = Baggage.where('reservation_id LIKE ? or user_id LIKE ?', search, search)
+            else
+                @baggages = Baggage.all
+            end
         end
     end
 
@@ -34,7 +39,7 @@ class BaggagesController < ApplicationController
         @reservation = Reservation.find(params[:baggage][:reservation_id])
         @reservation.total_cost = @reservation.total_cost + (10 * @baggage.weight.to_i)
         @baggage.baggage_cost = 10 * @baggage.weight.to_i
-            respond_to do |format|
+        respond_to do |format|
             if @baggage.save
                 @reservation.save
                 format.html { redirect_to reservations_path, notice: "Baggage was successfully created." }

@@ -4,7 +4,12 @@ class UsersController < ApplicationController
 
     # GET /users or /users.json
     def index
-        @users = User.all
+        if params[:search]
+            search = '%' + params[:search] + '%'
+            @users = User.where('name LIKE ? or id LIKE ?', search, search)
+        else
+            @users = User.all
+        end
     end
 
     # GET /users/1 or /users/1.json

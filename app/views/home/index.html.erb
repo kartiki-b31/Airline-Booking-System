@@ -2,7 +2,6 @@
 <h1>WolfFly Airline</h1>
 <p>Lets Flyyy!</p>
 <% if current_user %>
-  Logged in as <%= current_user.name %>.
   <br>
   <% if is_admin? %>
     <%= link_to 'Show All flights', flights_path %><br>

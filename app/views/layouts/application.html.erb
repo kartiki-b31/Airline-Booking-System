@@ -13,6 +13,7 @@
 <body>
 <div>
   <% if logged_in? %>
+    <br>
     <% if is_admin? %>
        Logged in as <%= current_user.name %>. Role: <u>Admin</u>
     <% else %>

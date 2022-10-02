@@ -1,7 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Baggages</h1>
-
+<% if is_admin? %>
+  <form action="/baggages" method="GET">
+    <input type="text" name="search" placeholder="Type UserId">
+    <input type="submit" value="Search">
+  </form>
+<% end %>
 <div id="baggages">
   <% @baggages.each do |baggage| %>
     <%= render baggage %>

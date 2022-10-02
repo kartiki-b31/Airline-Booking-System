@@ -4,7 +4,12 @@ class FlightsController < ApplicationController
 
     # GET /flights or /flights.json
     def index
-        @flights = Flight.all
+        if params[:search]
+            search = '%' + params[:search] + '%'
+            @flights = Flight.where('name LIKE ? or source LIKE ? or destination LIKE ?', search, search, search)
+        else
+            @flights = Flight.all
+        end
     end
 
     # GET /flights/1 or /flights/1.json
