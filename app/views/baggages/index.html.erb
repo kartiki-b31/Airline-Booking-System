@@ -7,15 +7,39 @@
     <input type="submit" value="Search">
   </form>
 <% end %>
-<div id="baggages">
+
+<table>
+  <thead>
+  <tr>
+    <th>Baggage</th>
+    <th>Weight</th>
+    <th>Baggage Cost</th>
+
+
+    <th colspan="4"></th>
+
+  </tr>
+  </thead>
+
+
+
+  <tbody>
   <% @baggages.each do |baggage| %>
-    <%= render baggage %>
-    <p>
-      <%= link_to "View baggage", baggage %>
+    <tr>
+
+      <td><%= baggage.baggage_id %></td>
+      <td><%= baggage.weight %></td>
+      <td><%= baggage.baggage_cost %></td>
+
+      <td><%= link_to "View baggage", baggage %></td>
     <td><%= link_to 'Edit', edit_baggage_path(baggage) %></td>
     <td><%= link_to 'Destroy', baggage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </p>
+
+    </tr>
   <% end %>
-</div>
+  </tbody>
+
+
+  </table>
 
 <%#= link_to "New baggage", new_baggage_path %>

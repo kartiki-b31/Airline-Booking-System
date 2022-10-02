@@ -6,13 +6,41 @@
   <input type="submit" value="Search">
 </form>
 <br>
-<div id="users">
+
+
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>User</th>
+    <th>Card</th>
+    <th>Address</th>
+    <th>Mobile</th>
+    <th>Email</th>
+
+    <th colspan="4"></th>
+
+  </tr>
+  </thead>
+
+
+  <tbody>
+
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "View", user %>
-    </p>
+    <tr>
+
+      <td><%= user.name %></td>
+      <td><%= user.name %></td>
+      <td><%= user.card %></td>
+      <td><%= user.address %></td>
+      <td><%= user.mobile %></td>
+      <td><%= user.email %></td>
+
+      <td><%= link_to "View", user %></td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>
 
 <%= link_to "New user", new_user_path %>

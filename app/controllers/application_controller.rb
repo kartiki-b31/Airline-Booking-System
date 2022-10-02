@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
     helper_method :logged_in?
     helper_method :is_admin?
 
+    helper_method :error_msg
+    helper_method :set_error
+    helper_method :is_error?
+
 
     def current_user
         if session[:user_id]
@@ -29,6 +33,20 @@ class ApplicationController < ActionController::Base
              else
                  false
              end
+        end
+    end
+
+    def set_error(error)
+        @error=error
+    end
+    def error_msg
+        @error
+    end
+    def is_error?
+        if @error == " "
+            false
+        else
+            true
         end
     end
 
