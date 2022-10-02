@@ -33,10 +33,10 @@ Deployed Server Link: http://152.7.98.88:8080/
 ## Credentials for Admin and Users
  - ADMIN :\
         - username: admin@ncsu.edu\
-        - password: admin\
+        - password: admin
  - Sample User 1:\
         - username: pm@ncsu.edu\
-        - password: pm\
+        - password: pm
  - Sample User 2: \
         - username: sg@ncsu.edu\
-        - password: sg\
+        - password: sg
