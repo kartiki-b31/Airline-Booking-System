@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
-    has_many :Reservations
-    has_many :Baggages
+    has_many :reservations, :dependent => :destroy
+    has_many :baggages, :dependent => :destroy
     has_secure_password
 
     before_save :downcase_email

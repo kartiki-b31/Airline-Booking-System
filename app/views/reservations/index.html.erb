@@ -2,10 +2,10 @@
 
 <h1>Reservations</h1>
 <% if is_admin? %>
-<form action="/reservations" method="GET">
-  <input type="text" name="search" placeholder="Type UserId">
-  <input type="submit" value="Search">
-</form>
+  <form action="/reservations" method="GET">
+    <input type="text" name="search" placeholder="Type UserId">
+    <input type="submit" value="Search">
+  </form>
 <% end %>
 
 <br>
@@ -37,7 +37,7 @@
         <td><%= reservation.user_id %></td>
         <td><%= User.find(reservation.user_id).name %></td>
       <% end %>
-    <td><%= reservation.passengers %></td>
+      <td><%= reservation.passengers %></td>
       <td><%= reservation.res_id %></td>
       <td><%= Flight.find(reservation.flight_id).name %></td>
       <td><%= Flight.find(reservation.flight_id).source %></td>
@@ -46,15 +46,12 @@
       <td><%= reservation.amenities %></td>
       <td><%= reservation.total_cost %></td>
 
-      <% if is_admin? %>
       <td><%= link_to "View", reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+      <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
       <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% else %>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
-      <% end %>
+      <% unless is_admin? %>
+      <td><%=  link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
+      <%  end %>
     </tr>
 
   <% end %>

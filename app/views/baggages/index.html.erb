@@ -11,8 +11,13 @@
 <table>
   <thead>
   <tr>
+    <% if is_admin? %>
+      <th>User Id</th>
+      <th>User Name</th>
+  <% end %>
+    <th>Reservation Number</th>
     <th>Baggage</th>
-    <th>Weight</th>
+    <th>No. of Bags</th>
     <th>Baggage Cost</th>
 
 
@@ -26,7 +31,11 @@
   <tbody>
   <% @baggages.each do |baggage| %>
     <tr>
-
+      <% if is_admin? %>
+        <td><%= baggage.user_id %></td>
+        <td><%= User.find(baggage.user_id).name %></td>
+    <% end %>
+      <td><%= link_to Reservation.find(baggage.reservation_id).res_id, Reservation.find(baggage.reservation_id) %></td>
       <td><%= baggage.baggage_id %></td>
       <td><%= baggage.weight %></td>
       <td><%= baggage.baggage_cost %></td>
