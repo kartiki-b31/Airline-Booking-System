@@ -1,6 +1,6 @@
 # WolfFly_Airline
 
-#Airline Booking System using Ruby on Rails
+## Airline Booking System using Ruby on Rails
 
 ## Requirement
  - Ruby on Rails
