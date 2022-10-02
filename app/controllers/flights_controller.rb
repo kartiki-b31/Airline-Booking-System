@@ -28,7 +28,11 @@ class FlightsController < ApplicationController
     # POST /flights or /flights.json
     def create
         @flight = Flight.new(flight_params)
-
+        if @flight.capacity > 0
+            @flight.status = 'Available'
+        else
+            @flight.status = 'Complete'
+        end
         respond_to do |format|
             if @flight.save
                 format.html { redirect_to flights_url, notice: "Flight was successfully created." }
@@ -42,10 +46,10 @@ class FlightsController < ApplicationController
 
     # PATCH/PUT /flights/1 or /flights/1.json
     def update
-        if @flight.capacity > 0
-            @flight.status = 'Available'
+        if params[:flight][:capacity].to_i > 0
+            params[:flight][:status] = 'Available'
         else
-            @flight.status = 'Complete'
+            params[:flight][:status] = 'Complete'
         end
         respond_to do |format|
             if @flight.update(flight_params)
