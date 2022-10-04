@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  <% if is_admin? %>
+    <div>
+      <%= form.label :user_id, style: "display: block" %>
+      <%= form.number_field :user_id %>
+    </div>
+  <% end %>
   <div>
     <%= form.label :passengers, style: "display: block" %>
     <%= form.number_field :passengers %>

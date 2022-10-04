@@ -35,11 +35,16 @@ class ReservationsController < ApplicationController
     def create
         @reservation = Reservation.new(reservation_params)
         @reservation.res_id = Array.new(10) { [*"A".."Z", *"0".."9"].sample }.join
-        @reservation.user = current_user
-        @flight = Flight.find(params[:reservation][:flight_id])
-        if @reservation.passengers > 4
-            @reservation.passengers = 4
+        if is_admin?
+            if User.find(params[:reservation][:user_id])
+                @reservation.user = User.find(params[:reservation][:user_id])
+            else
+                @reservation.errors = "User does not exists"
+            end
+        else
+            @reservation.user = current_user
         end
+        @flight = Flight.find(params[:reservation][:flight_id])
         if @flight.capacity > @reservation.passengers
             @flight.capacity = @flight.capacity - @reservation.passengers
             @reservation.total_cost = @flight.cost * @reservation.passengers
@@ -68,9 +73,6 @@ class ReservationsController < ApplicationController
     # PATCH/PUT /reservations/1 or /reservations/1.json
     def update
         @flight = Flight.find(@reservation.flight_id)
-        if @reservation.passengers > 4
-            @reservation.passengers = 4
-        end
         @old = Reservation.find(@reservation.id)
         @flight.capacity = @flight.capacity + @old.passengers
         @reservation.total_cost = @reservation.total_cost - (@flight.cost * @old.passengers)
@@ -101,6 +103,9 @@ class ReservationsController < ApplicationController
 
     # DELETE /reservations/1 or /reservations/1.json
     def destroy
+        @flight = Flight.find(@reservation.flight_id)
+        @flight.capacity = @flight.capacity + @reservation.passengers
+        @flight.save
         @reservation.destroy
 
         respond_to do |format|

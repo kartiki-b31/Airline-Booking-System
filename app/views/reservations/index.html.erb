@@ -8,7 +8,7 @@
   </form>
 <% end %>
 
-<br>
+<br><br>
 <table>
   <thead>
   <tr>
@@ -46,12 +46,10 @@
       <td><%= reservation.amenities %></td>
       <td><%= reservation.total_cost %></td>
 
-      <td><%= link_to "View", reservation %></td>
-      <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-      <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% unless is_admin? %>
-      <td><%=  link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
-      <%  end %>
+      <td><button><%= link_to "View", reservation %></button></td>
+      <td><button><%= link_to 'Edit', edit_reservation_path(reservation) %></button></td>
+      <td><button><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+      <td><button><%=  link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></button></td>
     </tr>
 
   <% end %>

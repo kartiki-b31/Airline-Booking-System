@@ -6,7 +6,7 @@
     <input type="text" name="search" placeholder="Type UserName/ UserId">
     <input type="submit" value="Search">
   </form>
-  <br>
+  <br><br>
 
 
 
@@ -37,13 +37,13 @@
         <td><%= user.address %></td>
         <td><%= user.mobile %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "View", user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><button><%= link_to "View", user %></button></td>
+        <td><button><%= link_to 'Edit', edit_user_path(user) %></button></td>
+        <td><button><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
       </tr>
     <% end %>
     </tbody>
   </table>
-  <br>
-  <%= link_to "New user", new_user_path %>
+  <br><br>
+  <button><%= link_to "New user", new_user_path %></button>
 <% end %>
