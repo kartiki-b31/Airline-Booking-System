@@ -40,9 +40,9 @@
       <td><%= baggage.weight %></td>
       <td><%= baggage.baggage_cost %></td>
 
-      <td><%= link_to "View baggage", baggage %></td>
-    <td><%= link_to 'Edit', edit_baggage_path(baggage) %></td>
-    <td><%= link_to 'Destroy', baggage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><button><%= link_to "View baggage", baggage %></button></td>
+    <td><button><%= link_to 'Edit', edit_baggage_path(baggage) %></button></td>
+    <td><button><%= link_to 'Destroy', baggage, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
 
     </tr>
   <% end %>
