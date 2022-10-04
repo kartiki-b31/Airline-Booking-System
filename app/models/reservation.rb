@@ -10,5 +10,5 @@ class Reservation < ApplicationRecord
     validates :amenities, inclusion: {in: %w(all wifi leg-space food) , message: "%{values} is not a valid class"},presence: true
     validates :res_id,presence: true, uniqueness: true
     validates :total_cost,presence: true,numericality: true
-\
+
 end

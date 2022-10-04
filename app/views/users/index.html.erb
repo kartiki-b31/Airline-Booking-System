@@ -37,25 +37,13 @@
         <td><%= user.address %></td>
         <td><%= user.mobile %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "View", user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><button><%= link_to "View", user %></button></td>
+        <td><button><%= link_to 'Edit', edit_user_path(user) %></button></td>
+        <td><button><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
       </tr>
     <% end %>
     </tbody>
   </table>
-
-
-  <script>
-      $( function() {
-          $( "#dialog" ).dialog();
-      } );
-  </script>
-
-
-  <div id="dialog" title="Basic dialog">
-    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
-  </div>
-  <br>
-  <%= link_to "New user", new_user_path %>
+  <br><br>
+  <button><%= link_to "New user", new_user_path %></button>
 <% end %>
