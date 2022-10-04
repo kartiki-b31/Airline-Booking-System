@@ -38,7 +38,7 @@
 
   <div>
     <%= form.label :flight_class, style: "display: block" %>
-    <%= form.text_field :flight_class %>
+    <%= form.select :flight_class ,[['Jumbo','jumbo'],['Private','private'],['Small','small']]%>
   </div>
 
   <div>
@@ -46,10 +46,11 @@
     <%= form.number_field :capacity %>
   </div>
 
-<!--  <div>-->
-    <%#= form.label :status, style: "display: block" %>
-    <%#= form.text_field :status %>
-<!--  </div>-->
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status ,[['Available','available'],['Complete','complete']]%>
+  </div>
+
 
   <div>
     <%= form.label :cost, style: "display: block" %>

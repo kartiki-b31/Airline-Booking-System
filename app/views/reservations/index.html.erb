@@ -43,12 +43,13 @@
       <td><%= Flight.find(reservation.flight_id).source %></td>
       <td><%= Flight.find(reservation.flight_id).destination %></td>
       <td><%= reservation.ticket_class %></td>
-      <td><%= reservation.amenities %></td>
+
       <td><%= reservation.total_cost %></td>
 
       <td><%= link_to "View", reservation %></td>
       <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-      <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= button_to 'Destroy', reservation, method: :delete, form: {data: { turbo_confirm: 'Are you sure?' } }%></td>
+
       <% unless is_admin? %>
       <td><%=  link_to "Add Baggage", new_baggage_path(:res_id => reservation.id) %></td>
       <%  end %>

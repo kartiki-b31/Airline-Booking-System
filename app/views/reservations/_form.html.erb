@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :ticket_class, style: "display: block" %>
-    <%= form.text_field :ticket_class %>
+    <%= form.select :ticket_class ,[['First','first'],['Business','business'],['Economy','economy']] %>
   </div>
 
   <div class="field">
@@ -32,7 +32,7 @@
 
   <div>
     <%= form.label :amenities, style: "display: block" %>
-    <%= form.text_field :amenities %>
+    <%= form.select :amenities ,[['All','all'],['Wifi','wifi'],['Leg-space','leg-space'],['Food','food']]%>
   </div>
 
   <div>

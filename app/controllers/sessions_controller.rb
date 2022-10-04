@@ -7,16 +7,21 @@ class SessionsController < ApplicationController
     def create
         user = User.find_by_email(params[:email])
 
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            redirect_to root_url
-        else
-            flash.now[:alert] = "Email or password is invalid"
-            alert="Email or password is invalid"
-            flash.alert = "Email or password is invalid"
+        #if user
+        #specific_user_class = find_user_type_object(user.user_type)
+        # specific_user_object = specific_user_class.find_by_user_id(user.id)
+            if user && user.authenticate(params[:password])
+                session[:user_id] = user.id
+                redirect_to root_url
+            else
+                flash.now[:alert] = "Email or password is invalid"
 
-            render "new"
-        end
+                render "new"
+            end
+        #else
+        #    flash.now[:alert] = "No user found"
+        #    render "new"
+        #end
     end
 
     def destroy
