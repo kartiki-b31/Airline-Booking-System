@@ -20,14 +20,15 @@
     <%= form.label :weight, style: "display: block" %>
     <%= form.number_field :weight %>
   </div>
+
   <div class="field">
     <%= form.hidden_field :reservation_id, value: @baggage.reservation_id.nil? ? @reservation.id : @baggage.reservation_id %>
   </div>
-  <div>
-    <%= form.label :baggage_cost, style: "display: block" %>
-    <%= form.number_field :baggage_cost %>
-  </div>
-
+<!--  <div>-->
+    <%#= form.label :baggage_cost, style: "display: block" %>
+    <%#= form.number_field :baggage_cost %>
+<!--  </div>-->
+  <br>
   <div>
     <%= form.submit %>
   </div>

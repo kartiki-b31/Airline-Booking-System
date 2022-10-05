@@ -35,16 +35,16 @@
   <div class="field">
     <%= form.hidden_field :flight_id, value: @reservation.flight_id.nil? ? @flight.id : @reservation.flight_id %>
   </div>
-
+  <br>
   <div>
     <%= form.label :amenities, style: "display: block" %>
     <%= form.select :amenities ,[['All','all'],['Wifi','wifi'],['Leg-space','leg-space'],['Food','food']]%>
   </div>
-
-  <div>
-    <%= form.label :total_cost, style: "display: block" %>
-    <%= form.number_field :total_cost %>
-  </div>
+<br>
+<!--  <div>-->
+    <%#= form.label :total_cost, style: "display: block" %>
+    <%#= form.number_field :total_cost %>
+<!--  </div>-->
 
   <div>
     <%= form.submit %>

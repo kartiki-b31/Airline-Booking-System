@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
     before_save :downcase_email
 
-    validates :email, :name,:password,:address, :mobile,format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
+    validates   :email ,format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
 
     private
 
