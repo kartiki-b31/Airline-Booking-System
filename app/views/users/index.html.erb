@@ -37,10 +37,13 @@
         <td><%= user.address %></td>
         <td><%= user.mobile %></td>
         <td><%= user.email %></td>
+
         <td><button><%= link_to "View", user %></button></td>
         <td><button><%= link_to 'Edit', edit_user_path(user) %></button></td>
+        <% unless user.email == "admin@ncsu.edu" %>
         <td><button><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
-      </tr>
+        <% end %>
+          </tr>
     <% end %>
     </tbody>
   </table>
