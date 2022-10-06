@@ -37,7 +37,7 @@ class BaggagesController < ApplicationController
         @baggage.baggage_id = Array.new(10) { [*"A".."Z", *"0".."9"].sample }.join
         @baggage.user = current_user
         @reservation = Reservation.find(params[:baggage][:reservation_id])
-        @reservation.total_cost = @reservation.total_cost + (10 * @baggage.weight.to_i)
+        @reservation.total_cost +=(10 * @baggage.weight.to_i)
         @baggage.baggage_cost = 10 * @baggage.weight.to_i
         respond_to do |format|
             if @baggage.save
@@ -54,13 +54,12 @@ class BaggagesController < ApplicationController
     # PATCH/PUT /baggages/1 or /baggages/1.json
     def update
         @reservation = Reservation.find(@baggage.reservation_id)
-        @old = Baggage.find(@baggage.id)
-        @reservation.total_cost = @reservation.total_cost - (10 * @old.weight.to_i)
-        @reservation.total_cost = @reservation.total_cost + (10 * @baggage.weight.to_i)
-        @baggage.baggage_cost = 10 * @baggage.weight.to_i
+        no_bags = params['baggage']['weight'].to_i - @baggage.weight.to_i
+        @reservation.total_cost += 10 * no_bags
+        @reservation.save
+        params['baggage']['baggage_cost'] = 10 * params['baggage']['weight'].to_i
         respond_to do |format|
             if @baggage.update(baggage_params)
-                @reservation.save
                 format.html { redirect_to reservations_path, notice: "Baggage was successfully updated." }
                 format.json { render :show, status: :ok, location: @baggage }
             else
@@ -72,6 +71,9 @@ class BaggagesController < ApplicationController
 
     # DELETE /baggages/1 or /baggages/1.json
     def destroy
+        @reservation = Reservation.find(@baggage.reservation_id)
+        @reservation.total_cost = @reservation.total_cost - (10 * @baggage.weight.to_i)
+        @reservation.save
         @baggage.destroy
 
         respond_to do |format|

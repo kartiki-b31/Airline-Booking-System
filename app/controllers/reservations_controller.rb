@@ -73,15 +73,17 @@ class ReservationsController < ApplicationController
     # PATCH/PUT /reservations/1 or /reservations/1.json
     def update
         @flight = Flight.find(@reservation.flight_id)
-        @old = Reservation.find(@reservation.id)
-        @flight.capacity = @flight.capacity + @old.passengers
-        @reservation.total_cost = @reservation.total_cost - (@flight.cost * @old.passengers)
-        if @flight.capacity > @reservation.passengers
-            @flight.capacity = @flight.capacity - @reservation.passengers
-            @reservation.total_cost = @flight.cost * @reservation.passengers
+        @flight.capacity = @flight.capacity + @reservation.passengers
+        puts @reservation.passengers
+        puts params['reservation']['passengers']
+        puts @flight.capacity
+        params['reservation']['total_cost']  = @reservation.total_cost - (@flight.cost * @reservation.passengers)
+        if @flight.capacity > params['reservation']['passengers'].to_i
+            @flight.capacity = @flight.capacity - params['reservation']['passengers'].to_i
+            params['reservation']['total_cost'] += @flight.cost * params['reservation']['passengers'].to_i
         else
-            @reservation.passengers = @reservation.passengers - @flight.capacity
-            @reservation.total_cost = @flight.cost * @reservation.passengers
+            params['reservation']['passengers'] = params['reservation']['passengers'].to_i - @flight.capacity
+            params['reservation']['total_cost'] += @flight.cost * params['reservation']['passengers'].to_i
             @flight.capacity = 0
         end
         if @flight.capacity == 0
