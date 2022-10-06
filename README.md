@@ -4,6 +4,17 @@
 
 ## Requirement
  - Ruby on Rails
+ 
+## Credentials for Admin and Users
+ - ADMIN :\
+        - username: admin@ncsu.edu\
+        - password: admin
+ - Sample User 1:\
+        - username: pm@ncsu.edu\
+        - password: pm
+ - Sample User 2: \
+        - username: sg@ncsu.edu\
+        - password: sg
 
 ## Application Overview
 
@@ -23,6 +34,7 @@ The main components of the system are:
 ## Testing
 
 The application is tested using the RSpec library of the rails. 
+User model and controller were teseted successfully.  
 
 ## Deployment 
 
@@ -30,13 +42,3 @@ The application is deployed using NCSU VCL Remote System.
 
 Deployed Server Link: http://152.7.98.88:8080/
 
-## Credentials for Admin and Users
- - ADMIN :\
-        - username: admin@ncsu.edu\
-        - password: admin
- - Sample User 1:\
-        - username: pm@ncsu.edu\
-        - password: pm
- - Sample User 2: \
-        - username: sg@ncsu.edu\
-        - password: sg
