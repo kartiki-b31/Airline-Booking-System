@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Baggages</h1>
+<br>
+<button> <%= link_to 'View Reservations', reservations_path %></button><br><br>
+
 <% if is_admin? %>
   <form action="/baggages" method="GET">
     <input type="text" name="search" placeholder="Type UserId">
