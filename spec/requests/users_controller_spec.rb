@@ -17,23 +17,18 @@ RSpec.describe "UsersControllers", type: :request do
       # Email validation tests
       it "should require an email" do
         no_email_user = User.new(@attr.merge(:email => ""))
-        no_email_user.should_not be_valid
+        expect(no_email_user).to_not  be_valid
       end
 
-      # Email validation tests
-      it "should require an email" do
-        no_email_user = User.new(@attr.merge(:email => ""))
-        no_email_user.should_not be_valid
-      end
 
       # Password validation tests
       it "should require a password" do
-        User.new(@attr.merge(:password => "", :password_confirmation => "")).should_not be_valid
+        expect(User.new(@attr.merge(:password => "", :password_confirmation => ""))).to_not  be_valid
       end
 
       # Password confirmation tests
       it "should require a matching password confirmation" do
-        User.new(@attr.merge(:password_confirmation => "invalid")).should_not be_valid
+        expect(User.new(@attr.merge(:password_confirmation => "invalid"))).to_not  be_valid
       end
 end
   end
