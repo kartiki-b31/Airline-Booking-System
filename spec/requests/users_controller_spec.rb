@@ -30,5 +30,16 @@ RSpec.describe "UsersControllers", type: :request do
       it "should require a matching password confirmation" do
         expect(User.new(@attr.merge(:password_confirmation => "invalid"))).to_not  be_valid
       end
+    
+      it 'checks user can be updated' do
+        @attr.update(:email => "lockout@ncsu.edu")
+        expect(User.find_by_email("lockout@ncsu.edu")).to eq(@attr)
+      end
+
+
+      it 'checks user can be destroyed' do
+        @attr.destroy
+        expect(User.count).to eq(0)
+      end
 end
   end
