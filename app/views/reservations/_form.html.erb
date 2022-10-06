@@ -17,11 +17,25 @@
       <%= form.number_field :user_id %>
     </div>
   <% end %>
+  <div class="field">
+    <%= form.label :flight_id %> <br>
+    <%= form.text_field :flight_id, value:Flight.find(@reservation.flight_id.nil? ? @flight.id : @reservation.flight_id).flight_id, disabled:true %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :flight_name %> <br>
+    <%= form.text_field :flight_name, value:Flight.find(@reservation.flight_id.nil? ? @flight.id : @reservation.flight_id).name, disabled:true %>
+  </div>
+  <br>
   <div>
     <%= form.label :passengers, style: "display: block" %>
-    <%= form.number_field :passengers %>
+    <%= form.number_field :passengers , :id => 'passengers',  max:Flight.find(@reservation.flight_id.nil? ? @flight.id : @reservation.flight_id).capacity , min:1, onChange: "calculateTotalPrice();" %>
   </div>
-
+  <br>
+<!--  <div class="field">-->
+    <%#= form.label :passengers, style: "display: block"  %>
+    <%#= form.number_field :passengers, :id => 'passengers',  max:@flight.capacity , min:1, onChange: "calculateTotalPrice();"  %>
+<!--  </div>-->
   <!--  <div>-->
   <%#= form.label :res_id, style: "display: block" %>
   <%#= form.text_field :res_id %>
@@ -41,11 +55,17 @@
     <%= form.select :amenities ,[['All','all'],['Wifi','wifi'],['Leg-space','leg-space'],['Food','food']]%>
   </div>
 <br>
-<!--  <div>-->
-    <%#= form.label :total_cost, style: "display: block" %>
-    <%#= form.number_field :total_cost %>
-<!--  </div>-->
+  <div>
+    <%= form.label :total_cost, style: "display: block" %>
+    <%= form.text_field :total_cost, :id => 'total_cost', readonly:true%>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+      function calculateTotalPrice(){
+          var price = "<%= Flight.find(@reservation.flight_id.nil? ? @flight.id : @reservation.flight_id).cost %>";
+          document.getElementById('total_cost').value = document.getElementById('passengers').value * price;
+      }
 
+  </script>
   <div>
     <%= form.submit %>
   </div>

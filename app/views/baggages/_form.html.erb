@@ -15,19 +15,35 @@
   <%#= form.label :baggage_id, style: "display: block" %>
   <%#= form.text_field :baggage_id %>
   <!--  </div>-->
-
+  <div class="field">
+    <%= form.label :reservation %> <br>
+    <%= form.text_field :reservation, value:Reservation.find(@baggage.reservation_id.nil? ? @reservation.id : @baggage.reservation_id).res_id, disabled:true %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :no_of_passengers %> <br>
+    <%= form.text_field :no_of_passengers, value:Reservation.find(@baggage.reservation_id.nil? ? @reservation.id : @baggage.reservation_id).passengers, disabled:true %>
+  </div>
+  <br>
   <div>
     <%= form.label :weight, style: "display: block" %>
-    <%= form.number_field :weight %>
+    <%= form.number_field :weight, :id => 'weight', min:1, onChange: "calculateTotalPrice();" %>
   </div>
 
   <div class="field">
     <%= form.hidden_field :reservation_id, value: @baggage.reservation_id.nil? ? @reservation.id : @baggage.reservation_id %>
   </div>
-<!--  <div>-->
-    <%#= form.label :baggage_cost, style: "display: block" %>
-    <%#= form.number_field :baggage_cost %>
-<!--  </div>-->
+  <br>
+  <div>
+    <%= form.label :baggage_cost, style: "display: block" %>
+    <%= form.number_field :baggage_cost, :id => 'baggage_cost' , readonly:true %>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+      function calculateTotalPrice(){
+          document.getElementById('baggage_cost').value = document.getElementById('weight').value * 10;
+      }
+
+  </script>
   <br>
   <div>
     <%= form.submit %>
