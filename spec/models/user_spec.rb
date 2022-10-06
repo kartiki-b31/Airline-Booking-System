@@ -29,5 +29,15 @@ RSpec.describe User, type: :model do
     subject.email = nil
     expect(subject).to_not be_valid
   end
+  
+  it 'checks user can be updated' do
+    subject.update(:email => "lockedin@ncsu.edu")
+    expect(User.find_by_email("lockedin@ncsu.edu")).to eq(subject(:email))
+  end
+
+  it 'checks user can be destroyed' do
+    subject.destroy
+    expect(User.count).to eq(0)
+  end
 
 end
