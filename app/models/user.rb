@@ -6,8 +6,9 @@ class User < ApplicationRecord
 
     before_save :downcase_email
 
-    validates   :email ,format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
+    validates   :email ,format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid" }, presence: true, uniqueness: true
 
+    validates   :card, presence: true, format: {with: /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/, message: "should be in xxxx-xxxx-xxxx-xxxx format."}
     private
 
     def downcase_email
